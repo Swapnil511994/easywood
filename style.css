@@ -399,6 +399,8 @@ html {
   justify-content: center;
   margin-bottom: -8rem;
   z-index: 1;
+  max-height: 14rem;
+  min-height: 14rem;
 }
 
 .item-content {
