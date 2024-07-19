@@ -1,8 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
+:root {
+  --FF: "Poppins", sans-serif;
+  --BLACK: #000000;
+  --LIGHTBLUE: #7b2e8f;
+}
+
 * {
-  font-family: "Poppins", sans-serif;
-  color: black;
+  font-family: var(--FF);
+  color: var(--BLACK);
 }
 
 html {
@@ -13,7 +19,7 @@ html {
 .navbar {
   display: flex;
   justify-content: space-between;
-  height: 6rem;
+  /* height: 6rem; */
   align-content: center;
   align-items: center;
   padding: 5rem;
@@ -25,11 +31,13 @@ html {
 
 .logo-container {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
 }
 
 .logo {
-  border: 2px solid #7b2e8f;
+  border: 2px solid var(--LIGHTBLUE);
   display: flex;
   border-radius: 50%;
   align-content: center;
@@ -42,6 +50,45 @@ html {
 .logo > img {
   height: 3rem;
   width: 1.5rem;
+}
+
+.hamburger-container {
+  display: none;
+  flex-flow: column nowrap;
+  height: 1.5rem;
+  width: 1.5rem;
+  max-width: 1.5rem;
+  max-height: 1.5rem;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+  background-color: var(--BLACK);
+  width: 1rem;
+  height: 0.1rem;
+  border-radius: 0.1rem;
+  position: absolute;
+  transition: all 0.5s;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+}
+
+.menu-icon::before {
+  transform: translate(-0.5rem, -0.3rem);
+}
+.menu-icon::after {
+  transform: translate(-0.5rem, 0.3rem);
 }
 
 .menu {
@@ -64,7 +111,10 @@ html {
 
 .menu-item:active,
 .menu-item:hover {
-  color: #7b2e8f;
+  color: var(--LIGHTBLUE);
+  transform: scale(1.2);
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
 }
 
 .search-container {
@@ -74,9 +124,8 @@ html {
 }
 
 .search {
-  width: 15rem;
   height: 4rem;
-  background: #7b2e8f1a;
+  background: var(--LIGHTBLUE) 1a;
   display: flex;
   flex-flow: row nowrap;
   align-content: center;
@@ -139,7 +188,7 @@ html {
 
 .social-item > i {
   font-size: 1.5rem;
-  color: #7b2e8f;
+  color: var(--LIGHTBLUE);
 }
 
 .banner-container {
@@ -175,7 +224,7 @@ html {
 .banner-item > button {
   width: 12rem;
   height: 3.3rem;
-  background: #7b2e8f;
+  background: var(--LIGHTBLUE);
   border: none;
   border-radius: 3.3rem;
   cursor: pointer;
@@ -260,7 +309,7 @@ html {
   font-size: 2rem;
   line-height: 2.6rem;
   font-weight: 600;
-  color: #7b2e8f;
+  color: var(--LIGHTBLUE);
   display: flex;
   justify-content: center;
 }
@@ -276,7 +325,7 @@ html {
   width: 12rem;
   height: 3rem;
   border-radius: 1.3rem;
-  border: 1px solid #7b2e8f;
+  border: 1px solid var(--LIGHTBLUE);
   margin-top: 1.5rem;
 }
 
@@ -311,11 +360,11 @@ html {
   text-transform: uppercase;
   font-size: 1.25rem;
   font-weight: 500;
-  color: #7b2e8f;
+  color: var(--LIGHTBLUE);
 }
 
 .categories-header > h2 > i {
-  color: #7b2e8f;
+  color: var(--LIGHTBLUE);
 }
 
 .categories-content {
@@ -349,7 +398,7 @@ html {
 
 .categories-sidebar-item:active,
 .categories-sidebar-item:hover {
-  background-color: #7b2e8f;
+  background-color: var(--LIGHTBLUE);
   color: white;
 }
 
@@ -423,11 +472,28 @@ html {
 }
 /* style: Categories --- End */
 
+/* Animations */
+@keyframes showMenu {
+  0% {
+    transform: scaleY(0);
+  }
+  80% {
+    transform: scaleY(1.2);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
 /* Media Queries for Mobile Responsiveness */
 @media screen and (max-width: 768px) {
   .navbar {
     flex-direction: column;
     padding: 1rem;
+  }
+
+  .hamburger-container {
+    display: flex;
   }
 
   .menu {
@@ -489,8 +555,22 @@ html {
     padding: 0.5rem;
   }
 
+  .logo-container {
+    width: 100%;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .search {
+    width: 100%;
+  }
+
   .menu {
     gap: 0.25rem;
+    animation: showMenu 0.5s ease-in-out 0s;
+    transform-origin: top center;
   }
 
   .submenu {
